@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diferencia de Cuadrados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="progress"><i id="prog"></i></div>
+  <div class="wrap hbar">
+    <div class="brand">MateVisual</div>
+    <div class="crumb">Matemáticas &gt; Álgebra &gt; <b>Diferencia de Cuadrados</b></div>
+    <button class="theme-btn" id="themeBtn" aria-label="Cambiar tema">🌙</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero eyebrow-none">
+    <h1>Diferencia de Cuadrados</h1>
+    <p class="lead">Descubre por qué a² − b² siempre se puede escribir como (a + b)(a − b), y practícalo moviendo un deslizador hasta que se sienta obvio.</p>
+    <div class="chips">
+      <div class="chip"><b>12 min</b> de estudio</div>
+      <div class="chip">Nivel: <b>Intermedio</b></div>
+      <div class="chip">Requiere: <b>Producto de binomios</b></div>
+    </div>
+    <button class="cta" onclick="document.getElementById('playground').scrollIntoView({behavior:'smooth'})">Ir al simulador</button>
+  </section>
+
+  <section>
+    <h2 class="h">Antes de empezar: multiplicar binomios</h2>
+    <p class="hint">La diferencia de cuadrados es un caso especial de este producto.</p>
+    <div class="card">
+      <div class="formula">(x + m)(x + n) = x² + (m+n)x + mn</div>
+      <ol class="steps">
+        <li>Multiplica los primeros términos de cada paréntesis.</li>
+        <li>Multiplica los términos externos y súmalos a los internos.</li>
+        <li>Multiplica los últimos términos.</li>
+        <li>Simplifica términos semejantes.</li>
+      </ol>
+      <div class="flash">Ejemplo flash: (x+3)(x−3) = x² −3x +3x −9 = <b>x² − 9</b>. Los términos centrales se cancelan.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="h">La regla</h2>
+    <p class="hint">Cuando los dos paréntesis solo cambian de signo, los términos del medio siempre se cancelan.</p>
+    <div class="grid2">
+      <div class="card">
+        <div class="formula">a² − b² = (a + b)(a − b)</div>
+        <p style="color:var(--sub);font-size:.9rem">a → término que se eleva al cuadrado primero<br>b → término que se resta al cuadrado</p>
+      </div>
+      <div class="card" style="display:flex;align-items:center;justify-content:center">
+        <svg id="areaSvg" viewBox="0 0 220 220" width="200" height="200"></svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="playground">
+    <h2 class="h">Simulador interactivo</h2>
+    <p class="hint">Mueve a y b y observa cómo el área azul menos el hueco coral siempre da el mismo resultado que (a+b)(a−b).</p>
+    <div class="card pg">
+      <div>
+        <svg id="pgSvg" viewBox="0 0 260 260" width="100%" height="260"></svg>
+      </div>
+      <div class="controls">
+        <div class="row">
+          <label>a = <span class="valpill" id="aVal">7</span></label>
+          <input type="range" id="aSlide" min="3" max="12" value="7">
+        </div>
+        <div class="row">
+          <label>b = <span class="valpill" id="bVal">3</span></label>
+          <input type="range" id="bSlide" min="1" max="11" value="3">
+        </div>
+        <div class="presets">
+          <button class="preset-btn" data-a="5" data-b="2">a=5, b=2</button>
+          <button class="preset-btn" data-a="10" data-b="4">a=10, b=4</button>
+          <button class="preset-btn" data-a="9" data-b="9">a=9, b=9 (caso 0)</button>
+        </div>
+        <div class="solve" id="solveBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="h">Ejercicios resueltos</h2>
+    <p class="hint">Organizados por nivel. Haz clic para ver la solución paso a paso.</p>
+    <div id="accordion"></div>
+  </section>
+
+  <section>
+    <h2 class="h">Errores comunes y práctica</h2>
+    <div class="alert"><b>Error frecuente:</b> escribir a² − b² = (a−b)² — esto es falso, ya que (a−b)² = a² − 2ab + b².</div>
+    <div class="alert"><b>Error frecuente:</b> olvidar el signo dentro del paréntesis y escribir (a+b)(a+b) en vez de (a+b)(a−b).</div>
+
+    <div class="card">
+      <div id="practiceQ" class="formula" style="text-align:left"></div>
+      <div class="practice">
+        <input type="text" id="pAnswer" placeholder="Escribe como (a+b)(a-b)">
+        <button onclick="checkPractice()">Comprobar</button>
+        <button onclick="newPractice()" style="background:var(--bg2);color:var(--text);border:1px solid var(--line)">Nuevo</button>
+      </div>
+      <div id="pfeedback"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="h">Mini-test diagnóstico</h2>
+    <div id="quiz"></div>
+    <p>Puntaje: <span id="quizScore">0</span> / 4</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="dl">
+      <a href="#" onclick="alert('Guía en PDF disponible próximamente.');return false">📄 Guía en PDF</a>
+      <a href="#" onclick="alert('Hoja de ejercicios disponible próximamente.');return false">📝 Hoja de ejercicios</a>
+      <a href="#" onclick="alert('Solucionario disponible próximamente.');return false">✅ Solucionario</a>
+    </div>
+    <div class="navrel">
+      <span>← Producto de binomios</span>
+      <span>Trinomio cuadrado perfecto →</span>
+    </div>
+    <div class="credit">MateVisual · Material de estudio de Álgebra · ¿Dudas? Escribe a tu docente.</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
